@@ -53,13 +53,27 @@ body {
 }
 
 .btn {
+  color: rgb(195, 195, 195);
+  font-size: 30px;
+  font-family: "Courier New";
+  text-shadow: rgb(0, 0, 0) 0px 0px 10px;
   box-sizing: content-box;
   background-color: rgb(31, 31, 31);
+  padding: 0px;
 }
 
 .btn:hover {
+  text-shadow: rgb(255, 255, 255) 0px 0px 2px;
   background-color: rgb(37, 37, 37);
   box-shadow: white 0px 0px 5px;
+  cursor: pointer;
+}
+
+.btn:active {
+  color: rgb(131, 131, 131);
+  background-color: rgb(22, 22, 22);
+  text-shadow: black 0px 0px 0px;
+  box-shadow: black 0px 0px 0px;
 }
 
 #clearBtn {
