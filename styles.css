@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -20,8 +23,14 @@ body {
 }
 
 #display {
+  font-family: "ZCOOL QingKe HuangYou", sans-serif;
+  font-size: 60px;
   background-color: rgb(88, 136, 87);
   height: 100px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 15px;
 }
 
 #btnContainer {
@@ -55,7 +64,7 @@ body {
 .btn {
   color: rgb(195, 195, 195);
   font-size: 30px;
-  font-family: "Courier New";
+  font-family: "Rajdhani";
   font-weight: bolder;
   text-shadow: rgb(0, 0, 0) 0px 0px 10px;
   box-sizing: content-box;
