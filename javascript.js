@@ -1,6 +1,6 @@
 
-buttonText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", 
-".", "=", "+", "CLEAR"]
+buttonText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
+  ".", "=", "+", "CLEAR"]
 
 btnContainer = document.querySelector("#btnContainer");
 
@@ -9,10 +9,63 @@ for (i = 0; i < 17; i++) {
   btn.classList.toggle("btn");
   btnContainer.appendChild(btn);
   btn.textContent = buttonText[i];
-  if (i === 16) btn.setAttribute("id", "clearBtn");
+  if (i === 16) {
+    btn.setAttribute("id", "clearBtn")
+  } else if (!isNaN(buttonText[i])) {
+    btn.classList.add("numBtn")
+  } else {
+    btn.classList.add("operatorBtn")
+  }
 }
 
+function add(num1, num2) {
+  return num1 + num2;
+}
 
+function subtract(num1, num2) {
+  return num1 - num2;
+}
+
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+
+function divide(num1, num2) {
+  return num1 / num2;
+}
+
+function operate(operator, num1, num2) {
+  switch (operator) {
+    case "+":
+      add(num1, num2);
+      break;
+    case "-":
+      subtract(num1, num2);
+      break;
+    case "*":
+      multiply(num1, num2);
+      break;
+    case "/":
+      divide(num1, num2);
+      break;
+  }
+}
+
+let display = document.querySelector("#display");
+let displayValue = display.textContent;
+
+function clearDisplay() {
+  display.textContent = "";
+  displayValue = 0;
+}
+
+const numBtns = document.querySelectorAll(".numBtn");
+numBtns.forEach(btn => {
+  btn.addEventListener("click", () => { //Event listeners to input numbers.
+    display.textContent += btn.textContent;
+    displayValue = display.textContent;
+  })
+});
 
 
 //Create functions "add", "subtract", "multiply" and "divide"

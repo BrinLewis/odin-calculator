@@ -64,7 +64,7 @@ body {
 .btn {
   color: rgb(195, 195, 195);
   font-size: 30px;
-  font-family: "Rajdhani";
+  font-family: "Rajdhani", sans-serif;
   font-weight: bolder;
   text-shadow: rgb(0, 0, 0) 0px 0px 10px;
   box-sizing: content-box;
