@@ -13,6 +13,10 @@ for (i = 0; i < 17; i++) {
     btn.setAttribute("id", "clearBtn")
   } else if (!isNaN(buttonText[i])) {
     btn.classList.add("numBtn")
+  } else if (i === 13) {
+    btn.setAttribute("id", "decimalBtn")
+  } else if (i === 14) {
+    btn.setAttribute("id", "equalsBtn")
   } else {
     btn.classList.add("operatorBtn")
   }
@@ -37,17 +41,13 @@ function divide(num1, num2) {
 function operate(operator, num1, num2) {
   switch (operator) {
     case "+":
-      add(num1, num2);
-      break;
+      return add(num1, num2);
     case "-":
-      subtract(num1, num2);
-      break;
+      return subtract(num1, num2);
     case "*":
-      multiply(num1, num2);
-      break;
+      return multiply(num1, num2);
     case "/":
-      divide(num1, num2);
-      break;
+      return divide(num1, num2);
   }
 }
 
@@ -63,10 +63,27 @@ const numBtns = document.querySelectorAll(".numBtn");
 numBtns.forEach(btn => {
   btn.addEventListener("click", () => { //Event listeners to input numbers.
     display.textContent += btn.textContent;
-    displayValue = display.textContent;
+    displayValue = parseInt(display.textContent);
   })
 });
 
+let storedNum = 0;
+let operator = undefined;
+
+const operatorBtns = document.querySelectorAll(".operatorBtn");
+operatorBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    storedNum = displayValue;
+    clearDisplay();
+    operator = `${btn.textContent}`
+  })
+});
+
+const equalsBtn = document.querySelector("#equalsBtn");
+equalsBtn.addEventListener("click", () => {
+  let result = operate(operator, storedNum, displayValue);
+  display.textContent = result;
+});
 
 //Create functions "add", "subtract", "multiply" and "divide"
 //Create function "operate" that takes an operator and 2 numbers then calls one of the above functions on the numbers. (Probably use switch statement for each operator case)
