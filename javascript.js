@@ -63,7 +63,7 @@ function clearDisplay() {
 const numBtns = document.querySelectorAll(".numBtn");
 numBtns.forEach(btn => {
   btn.addEventListener("click", () => { //Event listeners to input numbers.
-    if (displayValue.length < 11) { //Only input numbers if it will fit on the display (prevents overflow)
+    if (displayValue.toString().length < 11) { //Only input numbers if it will fit on the display (prevents overflow)
       display.textContent += btn.textContent;
       displayValue = display.textContent;
     }
