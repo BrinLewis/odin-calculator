@@ -86,9 +86,13 @@ operatorBtns.forEach(btn => {
 const equalsBtn = document.querySelector("#equalsBtn");
 equalsBtn.addEventListener("click", () => {
   let result = operate(operator, storedNum, displayValue);
-  displayValue = result;
-  display.textContent = result;
-  enableDec(); //Once an operation has been done, enable decimals again for the next number.
+  if (result.toString().length > 11) {
+    display.textContent = "ERR: TOO BIG";
+  } else {
+    displayValue = result;
+    display.textContent = result;
+    enableDec(); //Once an operation has been done, enable decimals again for the next number.
+  }
 });
 
 const clearBtn = document.querySelector("#clearBtn");
