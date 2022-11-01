@@ -4,11 +4,11 @@ btnText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
 
 btnContainer = document.querySelector("#btnContainer");
 
-for (i = 0; i < 17; i++) {
+for (i = 0; i < 17; i++) { 
   let btn = document.createElement("button");
   btn.classList.toggle("btn");
   btnContainer.appendChild(btn);
-  btn.textContent = btnText[i];
+  btn.textContent = btnText[i]; //Creates buttons for calculator, labelling them according to the btnText array.
 
   if (btnText[i] === "CLEAR") {
     btn.setAttribute("id", "clearBtn");
@@ -83,10 +83,16 @@ operatorBtns.forEach(btn => {
   })
 });
 
+function roundAnswer(num) {
+  return +(Math.round(num + "e+4") + "e-4") //Rounds input to 4 decmial places
+}
+
 const equalsBtn = document.querySelector("#equalsBtn");
 equalsBtn.addEventListener("click", () => {
   let result = operate(operator, storedNum, displayValue);
-  if (result.toString().length > 11) {
+  result = roundAnswer(result);
+
+  if (result.toString().length > 11) { //Checks if answer will fit on display
     display.textContent = "ERR: TOO BIG";
   } else {
     displayValue = result;
