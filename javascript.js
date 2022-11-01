@@ -1,6 +1,6 @@
 
 buttonText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
-  ".", "=", "+", "CLEAR"]
+  ".", "=", "+", "CLEAR"];
 
 btnContainer = document.querySelector("#btnContainer");
 
@@ -10,15 +10,13 @@ for (i = 0; i < 17; i++) {
   btnContainer.appendChild(btn);
   btn.textContent = buttonText[i];
   if (i === 16) {
-    btn.setAttribute("id", "clearBtn")
-  } else if (!isNaN(buttonText[i])) {
-    btn.classList.add("numBtn")
-  } else if (i === 13) {
-    btn.setAttribute("id", "decimalBtn")
+    btn.setAttribute("id", "clearBtn");
+  } else if (!isNaN(buttonText[i]) || i === 13) {
+    btn.classList.add("numBtn");
   } else if (i === 14) {
-    btn.setAttribute("id", "equalsBtn")
+    btn.setAttribute("id", "equalsBtn");
   } else {
-    btn.classList.add("operatorBtn")
+    btn.classList.add("operatorBtn");
   }
 }
 
@@ -63,7 +61,7 @@ const numBtns = document.querySelectorAll(".numBtn");
 numBtns.forEach(btn => {
   btn.addEventListener("click", () => { //Event listeners to input numbers.
     display.textContent += btn.textContent;
-    displayValue = parseInt(display.textContent);
+    displayValue = +display.textContent;
   })
 });
 
@@ -75,7 +73,7 @@ operatorBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     storedNum = displayValue;
     clearDisplay();
-    operator = `${btn.textContent}`
+    operator = `${btn.textContent}`;
   })
 });
 
@@ -86,6 +84,11 @@ equalsBtn.addEventListener("click", () => {
   display.textContent = result;
 });
 
+const clearBtn = document.querySelector("#clearBtn");
+clearBtn.addEventListener("click", () => {
+  clearDisplay();
+  storedNum = 0;
+});
 //Create functions "add", "subtract", "multiply" and "divide" X
 //Create function "operate" that takes an operator and 2 numbers then calls one of the above functions on the numbers. (Probably use switch statement for each operator case) X
 //Create event listeners that populate the display when number buttons are clicked. Store the displayValue in a variable for next steps. X
