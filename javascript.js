@@ -1,5 +1,5 @@
 
-buttonText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
+btnText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
   ".", "=", "+", "CLEAR"];
 
 btnContainer = document.querySelector("#btnContainer");
@@ -8,14 +8,15 @@ for (i = 0; i < 17; i++) {
   let btn = document.createElement("button");
   btn.classList.toggle("btn");
   btnContainer.appendChild(btn);
-  btn.textContent = buttonText[i];
-  if (i === 16) {
+  btn.textContent = btnText[i];
+
+  if (btnText[i] === "CLEAR") {
     btn.setAttribute("id", "clearBtn");
-  } else if (!isNaN(buttonText[i])) {
+  } else if (!isNaN(btnText[i])) { //If the array item is a number, give it class numBtn
     btn.classList.add("numBtn");
-  } else if (i === 13) {
+  } else if (btnText[i] === ".") {
     btn.setAttribute("id", "decimalBtn");
-  } else if (i === 14) {
+  } else if (btnText[i] === "=") {
     btn.setAttribute("id", "equalsBtn");
   } else {
     btn.classList.add("operatorBtn");
