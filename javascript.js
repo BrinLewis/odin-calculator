@@ -24,19 +24,19 @@ for (i = 0; i < 17; i++) {
 }
 
 function add(num1, num2) {
-  return num1 + num2;
+  return +num1 + +num2;
 }
 
 function subtract(num1, num2) {
-  return num1 - num2;
+  return +num1 - +num2;
 }
 
 function multiply(num1, num2) {
-  return num1 * num2;
+  return +num1 * +num2;
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  return +num1 / +num2;
 }
 
 function operate(operator, num1, num2) {
@@ -63,8 +63,10 @@ function clearDisplay() {
 const numBtns = document.querySelectorAll(".numBtn");
 numBtns.forEach(btn => {
   btn.addEventListener("click", () => { //Event listeners to input numbers.
-    display.textContent += btn.textContent;
-    displayValue = +display.textContent;
+    if (displayValue.length < 11) { //Only input numbers if it will fit on the display (prevents overflow)
+      display.textContent += btn.textContent;
+      displayValue = display.textContent;
+    }
   })
 });
 
@@ -99,11 +101,11 @@ const decimalBtn = document.querySelector("#decimalBtn");
 
 function inputDec(event) {
   display.textContent += decimalBtn.textContent;
-  displayValue = +display.textContent;
+  displayValue = display.textContent;
   decimalBtn.removeEventListener("click", inputDec); //When decimal is clicked, disable the listener so it can't be clicked again.
 }
 
 function enableDec() {
-decimalBtn.addEventListener("click", inputDec);
+  decimalBtn.addEventListener("click", inputDec);
 }
 enableDec(); //Call it so that Decimals are enabled from page load.
