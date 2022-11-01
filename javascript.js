@@ -11,8 +11,10 @@ for (i = 0; i < 17; i++) {
   btn.textContent = buttonText[i];
   if (i === 16) {
     btn.setAttribute("id", "clearBtn");
-  } else if (!isNaN(buttonText[i]) || i === 13) {
+  } else if (!isNaN(buttonText[i])) {
     btn.classList.add("numBtn");
+  } else if (i === 13) {
+    btn.setAttribute("id", "decimalBtn");
   } else if (i === 14) {
     btn.setAttribute("id", "equalsBtn");
   } else {
@@ -74,6 +76,7 @@ operatorBtns.forEach(btn => {
     storedNum = displayValue;
     clearDisplay();
     operator = `${btn.textContent}`;
+    enableDec(); //Once previous number is entered, and an operator has been clicked, enable decimals again for the next number.
   })
 });
 
@@ -82,6 +85,7 @@ equalsBtn.addEventListener("click", () => {
   let result = operate(operator, storedNum, displayValue);
   displayValue = result;
   display.textContent = result;
+  enableDec(); //Once an operation has been done, enable decimals again for the next number.
 });
 
 const clearBtn = document.querySelector("#clearBtn");
@@ -89,13 +93,16 @@ clearBtn.addEventListener("click", () => {
   clearDisplay();
   storedNum = 0;
 });
-//Create functions "add", "subtract", "multiply" and "divide" X
-//Create function "operate" that takes an operator and 2 numbers then calls one of the above functions on the numbers. (Probably use switch statement for each operator case) X
-//Create event listeners that populate the display when number buttons are clicked. Store the displayValue in a variable for next steps. X
-//Create event listeners for operator buttons that store the current number on the display, clearDisplay, store which operator was chosen. X
-//Create event listener for "=" button which runs "operate()" on the stored values. X
-//If there is already a decimal point on the display, don't let the user type another one.
 
-//NOTE: Will need to figure out the proper logic to store the values and call operate() with them.
+const decimalBtn = document.querySelector("#decimalBtn");
 
-//Event listener on "CLEAR" that runs a clearDisplay function to set textContent of display to nothing and reset stored values to 0.
+function inputDec(event) {
+  display.textContent += decimalBtn.textContent;
+  displayValue = +display.textContent;
+  decimalBtn.removeEventListener("click", inputDec); //When decimal is clicked, disable the listener so it can't be clicked again.
+}
+
+function enableDec() {
+decimalBtn.addEventListener("click", inputDec);
+}
+enableDec(); //Call it so that Decimals are enabled from page load.
