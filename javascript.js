@@ -99,6 +99,9 @@ equalsBtn.addEventListener("click", () => {
 
   if (answer.toString().length > 11) { //Checks if answer will fit on display
     display.textContent = "ERR: TOO BIG";
+  } else if (operator === "/" && displayValue === "0") {
+    answer = "*Universe Dies*"
+    display.textContent = answer;
   } else {
     displayValue = answer;
     display.textContent = answer;
