@@ -4,7 +4,7 @@ btnText = ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0",
 
 btnContainer = document.querySelector("#btnContainer");
 
-for (i = 0; i < 17; i++) { 
+for (i = 0; i < 17; i++) {
   let btn = document.createElement("button");
   btn.classList.toggle("btn");
   btnContainer.appendChild(btn);
@@ -52,8 +52,10 @@ function operate(operator, num1, num2) {
   }
 }
 
-let display = document.querySelector("#display");
+const display = document.querySelector("#display");
 let displayValue = display.textContent;
+let answer = 0;
+let operator = undefined;
 
 function clearDisplay() {
   display.textContent = "";
@@ -67,16 +69,18 @@ numBtns.forEach(btn => {
       display.textContent += btn.textContent;
       displayValue = display.textContent;
     }
+
+    if (operator !== undefined) {
+      answer = operate(operator, answer, displayValue);
+    } else {
+      answer = displayValue;
+    }
   })
 });
-
-let storedNum = 0;
-let operator = undefined;
 
 const operatorBtns = document.querySelectorAll(".operatorBtn");
 operatorBtns.forEach(btn => {
   btn.addEventListener("click", () => {
-    storedNum = displayValue;
     clearDisplay();
     operator = `${btn.textContent}`;
     enableDec(); //Once previous number is entered, and an operator has been clicked, enable decimals again for the next number.
@@ -89,14 +93,15 @@ function roundAnswer(num) {
 
 const equalsBtn = document.querySelector("#equalsBtn");
 equalsBtn.addEventListener("click", () => {
-  let result = operate(operator, storedNum, displayValue);
-  result = roundAnswer(result);
+  if (operator !== undefined) {
+    answer = roundAnswer(answer);
+  }
 
-  if (result.toString().length > 11) { //Checks if answer will fit on display
+  if (answer.toString().length > 11) { //Checks if answer will fit on display
     display.textContent = "ERR: TOO BIG";
   } else {
-    displayValue = result;
-    display.textContent = result;
+    displayValue = answer;
+    display.textContent = answer;
     enableDec(); //Once an operation has been done, enable decimals again for the next number.
   }
 });
@@ -104,7 +109,7 @@ equalsBtn.addEventListener("click", () => {
 const clearBtn = document.querySelector("#clearBtn");
 clearBtn.addEventListener("click", () => {
   clearDisplay();
-  storedNum = 0;
+  operator = undefined;
 });
 
 const decimalBtn = document.querySelector("#decimalBtn");
